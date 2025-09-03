@@ -147,6 +147,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
             .collect(Collectors.toList());
     }
 
+
 	@Override
 	public List<EmpleadoMonedaResponse> obtenerEmpleadosPorNombre(Long numCia, NombreRequest request) {
         List<Empleado> empleados = repository.findByNumCiaAndNombreContainingIgnoreCase(numCia, request.nombre());

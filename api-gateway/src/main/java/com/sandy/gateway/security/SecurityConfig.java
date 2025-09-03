@@ -25,8 +25,12 @@ public class SecurityConfig {
 		                "/api/monedas/swagger-ui/**",
 		                "/api/empleados/v3/api-docs",
 		                "/api/empleados/swagger-ui/**",
+<<<<<<< HEAD
 	                    "/v3/api-docs/**",
 	                    "/h2-console/**"
+=======
+	                    "/v3/api-docs/**"
+>>>>>>> b7bb9a0d88d07dc3631edb5a6d6f60f6f98f4fe0
 	            ).permitAll()
 	            .anyExchange().authenticated()
 	        )
