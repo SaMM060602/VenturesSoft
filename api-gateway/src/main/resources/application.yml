@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: api-gateway
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
+
+  cloud:
+    loadbalancer:
+      enabled: true
+
+    gateway:
+      routes:
+        - id: msv-monedas
+          uri: lb://msv-monedas
+          predicates:
+            - Path=/api/monedas/**
+          filters:
+            - StripPrefix=2
+        - id: msv-empleados
+          uri: lb://msv-empleados
+          predicates:
+            - Path=/api/empleados/**
+          filters:
+            - StripPrefix=2
+        - id: msv-monedas-swagger
+          uri: lb://msv-monedas
+          predicates:
+            - Path=/api/swagger-ui/**
+          filters:
+            - StripPrefix=1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+server:
+  port: 8090
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: Monedas
+        url: /api/monedas/v3/api-docs
+      - name: Empleados
+        url: /api/empleados/v3/api-docs
+    path: /api/swagger-ui.html
+    persistAuthorization: true
